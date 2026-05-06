@@ -8,7 +8,7 @@ import traceback
 # ─── PAGE CONFIG ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Tạo SBD Tự Động",
-    page_icon="📋",
+    page_icon="images/favicon.png",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
