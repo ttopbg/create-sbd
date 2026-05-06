@@ -453,7 +453,8 @@ st.markdown('<div class="steps-wrapper" style="text-align: center;">BEBRAS - AMC
 col_lbl1, col_body1 = st.columns([1, 4], gap="small")
 with col_lbl1:
     # st.markdown('<div class="step-badge">Bước 1</div><br>Chọn kỳ thi', unsafe_allow_html=True)
-    st.markdown('<div class="step-badge">Bước 1</div><div class="step-title">Chọn kỳ thi</div>', unsafe_allow_html=True)
+    # st.markdown('<div class="step-badge">Bước 1</div><div class="step-title">Chọn kỳ thi</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge" style="text-align: center;">Bước 1</div><div class="step-title" style="text-align: center;">Chọn kỳ thi</div>', unsafe_allow_html=True)
 with col_body1:
     exam_key = st.radio(
         "Chọn kỳ thi",
