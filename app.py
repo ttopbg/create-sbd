@@ -475,7 +475,7 @@ st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 # ── BƯỚC 2: File dữ liệu ──────────────────────────────────────────────────────
 col_lbl2, col_body2 = st.columns([1, 4], gap="small")
 with col_lbl2:
-    st.markdown('<div class="step-badge">Bước 2<br>Upload</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 1</div> Chọn kỳ thi', unsafe_allow_html=True)
 with col_body2:
     st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
     st.download_button(
