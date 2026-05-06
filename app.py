@@ -440,7 +440,7 @@ for k in ["result_df", "result_bytes", "errors"]:
 # ═══════════════════════════════════════════════════════════════════════════════
 st.markdown('<div class="app-title">📋 CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="steps-title" style="text-align: center;">BEBRAS - AMC - VEO</div>', unsafe_allow_html=True)
+st.markdown('<div class="steps-title" style="text-align: center;">BEBRAS - AMC - VEO</div></br></br></br>', unsafe_allow_html=True)
 
 # ── BƯỚC 1: Chọn kỳ thi ───────────────────────────────────────────────────────
 # st.markdown("""
