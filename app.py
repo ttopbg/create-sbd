@@ -452,7 +452,7 @@ st.markdown('<div class="steps-wrapper" style="text-align: center;">BEBRAS - AMC
 
 col_lbl1, col_body1 = st.columns([1, 4], gap="small")
 with col_lbl1:
-    st.markdown('<div class="step-badge">Bước 1<br>Chọn kỳ thi</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 1</div><br>Chọn kỳ thi', unsafe_allow_html=True)
 with col_body1:
     exam_key = st.radio(
         "Chọn kỳ thi",
@@ -475,7 +475,7 @@ st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 # ── BƯỚC 2: File dữ liệu ──────────────────────────────────────────────────────
 col_lbl2, col_body2 = st.columns([1, 4], gap="small")
 with col_lbl2:
-    st.markdown('<div class="step-badge">Bước 1</div> Chọn kỳ thi', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 2</div><br>Upload', unsafe_allow_html=True)
 with col_body2:
     st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
     st.download_button(
@@ -496,7 +496,7 @@ st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 # ── BƯỚC 3: Xử lý ─────────────────────────────────────────────────────────────
 col_lbl3, col_body3 = st.columns([1, 4], gap="small")
 with col_lbl3:
-    st.markdown('<div class="step-badge">Bước 3<br>Xử lý</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 3</div><br>Xử lý', unsafe_allow_html=True)
 with col_body3:
     if uploaded:
         if st.button("🚀 Tạo SBD", type="primary", use_container_width=False):
