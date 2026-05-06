@@ -8,7 +8,7 @@ import traceback
 # ─── PAGE CONFIG ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Tạo SBD Tự Động",
-    page_icon="🔃",
+    page_icon="📋",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -147,9 +147,58 @@ small { color: #475569 !important; }
 /* ── Dataframe ── */
 [data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
 
-/* ── Selectbox / inputs ── */
-[data-testid="stSelectbox"] label,
-[data-testid="stTextInput"] label { color: #1E293B !important; }
+/* ── Step badge (cột trái) ── */
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #1D4ED8;
+    color: #FFFFFF !important;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border-radius: 8px;
+    padding: .35rem .75rem;
+    margin-top: .15rem;
+    white-space: nowrap;
+}
+
+/* ── Divider giữa các bước ── */
+.row-divider {
+    border-top: 1.5px solid #DBEAFE;
+    margin: .8rem 0;
+}
+
+/* ── Sub-label trong bước 2 ── */
+.sub-label {
+    font-size: .8rem;
+    font-weight: 700;
+    color: #2563EB !important;
+    margin-bottom: .3rem;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+/* ── Note kỳ thi ── */
+.exam-note {
+    font-size: .83rem;
+    color: #475569 !important;
+    background: #F0F6FF;
+    border-left: 3px solid #93C5FD;
+    border-radius: 0 6px 6px 0;
+    padding: .45rem .8rem;
+    margin-top: .5rem;
+}
+
+/* ── Wrapper toàn bộ 3 bước ── */
+.steps-wrapper {
+    background: #FFFFFF;
+    border: 1.5px solid #DBEAFE;
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 2px 10px rgba(37,99,235,.06);
+    margin-bottom: 1.2rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -162,18 +211,18 @@ EXAM_RULES = {
         "valid_grades": list(range(1, 13)),
     },
     "AMC8": {
-        "label": "8️⃣ AMC8",
+        "label": "🔢  AMC8",
         "desc": "Lớp 4–8",
         "valid_grades": [4, 5, 6, 7, 8],
     },
     "AMC1012": {
-        "label": "1️⃣2️⃣ AMC10/12",
+        "label": "📐  AMC10/12",
         "desc": "AMC10: Lớp 6–10 | AMC12: Lớp 11–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"AMC10": [6,7,8,9,10], "AMC12": [11,12]},
     },
     "VEO": {
-        "label": "✡️ VEO",
+        "label": "🌿  VEO",
         "desc": "VEO JUNIOR: Lớp 6–9 | VEO: Lớp 10–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"VEO JUNIOR": [6,7,8,9], "VEO": [10,11,12]},
@@ -389,69 +438,100 @@ for k in ["result_df", "result_bytes", "errors"]:
 # ═══════════════════════════════════════════════════════════════════════════════
 # UI
 # ═══════════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="app-title">CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
-st.markdown('<div class="app-subtitle">BEBRAS · AMC8 · AMC10/12 · VEO</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-title">📋 CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
 
-# ── BƯỚC 1 ────────────────────────────────────────────────────────────────────
-st.markdown('<div class="card"><div class="card-label">Bước 1</div><div class="card-title">🎯 Chọn kỳ thi</div>', unsafe_allow_html=True)
-exam_key = st.radio(
-    "exam",
-    options=list(EXAM_RULES.keys()),
-    format_func=lambda k: EXAM_RULES[k]["label"],
-    horizontal=True,
-    label_visibility="collapsed",
-)
-st.caption(EXAM_RULES[exam_key]["desc"])
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('<div class="steps-wrapper">', unsafe_allow_html=True)
 
-# ── BƯỚC 2 ────────────────────────────────────────────────────────────────────
-st.markdown('<div class="card"><div class="card-label">Bước 2</div><div class="card-title">📂 File dữ liệu</div>', unsafe_allow_html=True)
-col_dl, col_up = st.columns([1, 2], gap="medium")
-with col_dl:
+# ── BƯỚC 1: Chọn kỳ thi ───────────────────────────────────────────────────────
+st.markdown("""
+<div class="row-card">
+  <div class="row-label">Bước 1</div>
+  <div class="row-content" id="step1-content"></div>
+</div>
+""", unsafe_allow_html=True)
+
+col_lbl1, col_body1 = st.columns([1, 4], gap="small")
+with col_lbl1:
+    st.markdown('<div class="step-badge">Bước 1</div>', unsafe_allow_html=True)
+with col_body1:
+    exam_key = st.radio(
+        "Chọn kỳ thi",
+        options=list(EXAM_RULES.keys()),
+        format_func=lambda k: EXAM_RULES[k]["label"],
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    # Note cho từng kỳ thi
+    EXAM_NOTES = {
+        "BEBRAS":  "Cấp độ 1: Lớp 1–2 · Cấp độ 2: Lớp 3–4 · Cấp độ 3: Lớp 5–6 · Cấp độ 4: Lớp 7–8 · Cấp độ 5: Lớp 9–10 · Cấp độ 6: Lớp 11–12",
+        "AMC8":    "Dành cho học sinh Lớp 4 – 8",
+        "AMC1012": "AMC10: Lớp 6–10 · AMC12: Lớp 11–12",
+        "VEO":     "VEO JUNIOR: Lớp 6–9 · VEO: Lớp 10–12",
+    }
+    st.markdown(f'<div class="exam-note">ℹ️ {EXAM_NOTES[exam_key]}</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
+
+# ── BƯỚC 2: File dữ liệu ──────────────────────────────────────────────────────
+col_lbl2, col_body2 = st.columns([1, 4], gap="small")
+with col_lbl2:
+    st.markdown('<div class="step-badge">Bước 2</div>', unsafe_allow_html=True)
+with col_body2:
+    st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
     st.download_button(
-        "⬇️ Tải file mẫu",
+        "⬇️ Tải file mẫu (SBD_mẫu.xlsx)",
         data=load_sample_bytes(),
         file_name="SBD_mẫu.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        use_container_width=True,
     )
-    st.caption("3 sheets: Học-sinh · Điểm-thi · Xếp-điểm-thi")
-with col_up:
-    uploaded = st.file_uploader("Upload file data (.xlsx)", type=["xlsx"], label_visibility="collapsed")
-st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-label" style="margin-top:.9rem;">📤 Upload file data</div>', unsafe_allow_html=True)
+    uploaded = st.file_uploader(
+        "Upload file .xlsx",
+        type=["xlsx"],
+        label_visibility="collapsed",
+    )
 
-# ── BƯỚC 3 ────────────────────────────────────────────────────────────────────
-st.markdown('<div class="card"><div class="card-label">Bước 3</div><div class="card-title">⚙️ Xử lý & Tải kết quả</div>', unsafe_allow_html=True)
+st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 
-if uploaded:
-    if st.button("🚀 Tạo SBD", type="primary"):
-        st.session_state.result_df = None
-        st.session_state.result_bytes = None
-        st.session_state.errors = None
-        with st.spinner("Đang xử lý..."):
-            try:
-                xl = pd.ExcelFile(uploaded)
-                missing_sheets = [s for s in ["Học-sinh","Điểm-thi","Xếp-điểm-thi"] if s not in xl.sheet_names]
-                if missing_sheets:
-                    st.session_state.errors = [f"File thiếu sheet: **{', '.join(missing_sheets)}**"]
-                else:
-                    def read(s):
-                        df = pd.read_excel(uploaded, sheet_name=s)
-                        return df[[c for c in df.columns if not str(c).startswith("Unnamed")]]
-                    df_hs   = read("Học-sinh")
-                    df_diem = read("Điểm-thi")
-                    df_xep  = read("Xếp-điểm-thi")
-                    errs = validate_input(df_hs, df_diem, df_xep, exam_key)
-                    if errs:
-                        st.session_state.errors = errs
+# ── BƯỚC 3: Xử lý ─────────────────────────────────────────────────────────────
+col_lbl3, col_body3 = st.columns([1, 4], gap="small")
+with col_lbl3:
+    st.markdown('<div class="step-badge">Bước 3</div>', unsafe_allow_html=True)
+with col_body3:
+    if uploaded:
+        if st.button("🚀 Tạo SBD", type="primary", use_container_width=False):
+            st.session_state.result_df = None
+            st.session_state.result_bytes = None
+            st.session_state.errors = None
+            with st.spinner("Đang xử lý..."):
+                try:
+                    xl = pd.ExcelFile(uploaded)
+                    missing_sheets = [s for s in ["Học-sinh","Điểm-thi","Xếp-điểm-thi"] if s not in xl.sheet_names]
+                    if missing_sheets:
+                        st.session_state.errors = [f"File thiếu sheet: **{', '.join(missing_sheets)}**"]
                     else:
-                        df_res = process_sbd(df_hs, df_diem, df_xep, exam_key)
-                        st.session_state.result_df = df_res
-                        st.session_state.result_bytes = export_excel(df_res, df_diem, df_xep)
-            except Exception as e:
-                st.session_state.errors = [f"Lỗi: {e}", f"```\n{traceback.format_exc()}\n```"]
+                        def read(s):
+                            df = pd.read_excel(uploaded, sheet_name=s)
+                            return df[[c for c in df.columns if not str(c).startswith("Unnamed")]]
+                        df_hs   = read("Học-sinh")
+                        df_diem = read("Điểm-thi")
+                        df_xep  = read("Xếp-điểm-thi")
+                        errs = validate_input(df_hs, df_diem, df_xep, exam_key)
+                        if errs:
+                            st.session_state.errors = errs
+                        else:
+                            df_res = process_sbd(df_hs, df_diem, df_xep, exam_key)
+                            st.session_state.result_df = df_res
+                            st.session_state.result_bytes = export_excel(df_res, df_diem, df_xep)
+                except Exception as e:
+                    st.session_state.errors = [f"Lỗi: {e}", f"```\n{traceback.format_exc()}\n```"]
+    else:
+        st.markdown('<span style="color:#94A3B8;font-size:.9rem;">← Upload file ở Bước 2 trước</span>', unsafe_allow_html=True)
 
-# ── Lỗi + sửa trực tiếp ──
+st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)  # close steps-wrapper
+
+# ── Lỗi + sửa trực tiếp ──────────────────────────────────────────────────────
 if st.session_state.errors:
     for err in st.session_state.errors:
         st.markdown(f'<div class="banner-err">⚠️ {err}</div>', unsafe_allow_html=True)
@@ -488,7 +568,7 @@ if st.session_state.errors:
         except Exception:
             pass
 
-# ── Kết quả ──
+# ── Kết quả ──────────────────────────────────────────────────────────────────
 if st.session_state.result_df is not None:
     df_res = st.session_state.result_df
     st.markdown(f'<div class="banner-ok">✅ Xử lý thành công — {len(df_res):,} học sinh.</div>', unsafe_allow_html=True)
@@ -507,12 +587,9 @@ if st.session_state.result_df is not None:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         type="primary",
     )
-elif not uploaded:
-    st.info("👆 Upload file data ở Bước 2 để bắt đầu.")
 
-st.markdown('</div>', unsafe_allow_html=True)
-# st.markdown(
-#     '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1rem;">'
-#     'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
-#     unsafe_allow_html=True,
-# )
+st.markdown(
+    '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
+    'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
+    unsafe_allow_html=True,
+)
