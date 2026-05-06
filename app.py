@@ -206,23 +206,23 @@ small { color: #475569 !important; }
 # ─── CONSTANTS ─────────────────────────────────────────────────────────────────
 EXAM_RULES = {
     "BEBRAS": {
-        "label": "🦫  BEBRAS",
+        "label": "BEBRAS",
         "desc": "Lớp 1–12, chia 6 cấp độ",
         "valid_grades": list(range(1, 13)),
     },
     "AMC8": {
-        "label": "🔢  AMC8",
+        "label": "AMC8",
         "desc": "Lớp 4–8",
         "valid_grades": [4, 5, 6, 7, 8],
     },
     "AMC1012": {
-        "label": "📐  AMC10/12",
+        "label": "AMC10/12",
         "desc": "AMC10: Lớp 6–10 | AMC12: Lớp 11–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"AMC10": [6,7,8,9,10], "AMC12": [11,12]},
     },
     "VEO": {
-        "label": "🌿  VEO",
+        "label": "VEO",
         "desc": "VEO JUNIOR: Lớp 6–9 | VEO: Lớp 10–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"VEO JUNIOR": [6,7,8,9], "VEO": [10,11,12]},
@@ -452,7 +452,7 @@ st.markdown('<div class="steps-wrapper" style="text-align: center;">BEBRAS - AMC
 
 col_lbl1, col_body1 = st.columns([1, 4], gap="small")
 with col_lbl1:
-    st.markdown('<div class="step-badge">Bước 1</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 1 - Chọn kỳ thi</div>', unsafe_allow_html=True)
 with col_body1:
     exam_key = st.radio(
         "Chọn kỳ thi",
@@ -475,7 +475,7 @@ st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 # ── BƯỚC 2: File dữ liệu ──────────────────────────────────────────────────────
 col_lbl2, col_body2 = st.columns([1, 4], gap="small")
 with col_lbl2:
-    st.markdown('<div class="step-badge">Bước 2</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 2 - Upload</div>', unsafe_allow_html=True)
 with col_body2:
     st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
     st.download_button(
@@ -496,7 +496,7 @@ st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 # ── BƯỚC 3: Xử lý ─────────────────────────────────────────────────────────────
 col_lbl3, col_body3 = st.columns([1, 4], gap="small")
 with col_lbl3:
-    st.markdown('<div class="step-badge">Bước 3</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-badge">Bước 3 - Xử lý</div>', unsafe_allow_html=True)
 with col_body3:
     if uploaded:
         if st.button("🚀 Tạo SBD", type="primary", use_container_width=False):
@@ -588,8 +588,8 @@ if st.session_state.result_df is not None:
         type="primary",
     )
 
-st.markdown(
-    '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
-    'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
-    unsafe_allow_html=True,
-)
+# st.markdown(
+#     '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
+#     'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
+#     unsafe_allow_html=True,
+# )
