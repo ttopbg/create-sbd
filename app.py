@@ -8,7 +8,7 @@ import traceback
 # ─── PAGE CONFIG ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Tạo SBD Tự Động",
-    page_icon="images/favicon.png",
+    page_icon="🔃",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -162,18 +162,18 @@ EXAM_RULES = {
         "valid_grades": list(range(1, 13)),
     },
     "AMC8": {
-        "label": "🔢  AMC8",
+        "label": "8️⃣ AMC8",
         "desc": "Lớp 4–8",
         "valid_grades": [4, 5, 6, 7, 8],
     },
     "AMC1012": {
-        "label": "📐  AMC10/12",
+        "label": "1️⃣2️⃣ AMC10/12",
         "desc": "AMC10: Lớp 6–10 | AMC12: Lớp 11–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"AMC10": [6,7,8,9,10], "AMC12": [11,12]},
     },
     "VEO": {
-        "label": "🌿  VEO",
+        "label": "✡️ VEO",
         "desc": "VEO JUNIOR: Lớp 6–9 | VEO: Lớp 10–12",
         "valid_grades": list(range(6, 13)),
         "sub_levels": {"VEO JUNIOR": [6,7,8,9], "VEO": [10,11,12]},
