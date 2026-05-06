@@ -443,12 +443,12 @@ st.markdown('<div class="app-title">📋 CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</
 st.markdown('<div class="steps-wrapper">', unsafe_allow_html=True)
 
 # ── BƯỚC 1: Chọn kỳ thi ───────────────────────────────────────────────────────
-st.markdown("""
-<div class="row-card">
-  <div class="row-label">Bước 1</div>
-  <div class="row-content" id="step1-content"></div>
-</div>
-""", unsafe_allow_html=True)
+# st.markdown("""
+# <div class="row-card">
+#   <div class="row-label">Bước 1</div>
+#   <div class="row-content" id="step1-content"></div>
+# </div>
+# """, unsafe_allow_html=True)
 
 col_lbl1, col_body1 = st.columns([1, 4], gap="small")
 with col_lbl1:
