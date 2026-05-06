@@ -389,7 +389,7 @@ for k in ["result_df", "result_bytes", "errors"]:
 # ═══════════════════════════════════════════════════════════════════════════════
 # UI
 # ═══════════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="app-title">📋 CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-title">CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-subtitle">BEBRAS · AMC8 · AMC10/12 · VEO</div>', unsafe_allow_html=True)
 
 # ── BƯỚC 1 ────────────────────────────────────────────────────────────────────
@@ -511,8 +511,8 @@ elif not uploaded:
     st.info("👆 Upload file data ở Bước 2 để bắt đầu.")
 
 st.markdown('</div>', unsafe_allow_html=True)
-st.markdown(
-    '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1rem;">'
-    'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
-    unsafe_allow_html=True,
-)
+# st.markdown(
+#     '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1rem;">'
+#     'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
+#     unsafe_allow_html=True,
+# )
