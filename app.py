@@ -214,8 +214,10 @@ def validate_input(df_hs: pd.DataFrame, df_diem: pd.DataFrame, df_xep: pd.DataFr
         errors.append(f"Có học sinh không thuộc khối hợp lệ cho {exam}: {list(invalid_grades)}")
 
     # Check all Cụm have a Điểm thi
-    cum_list = df_hs["Cụm"].dropna().unique()
-    xep_map = df_xep.dropna(subset=["Cụm", "Điểm thi"]).set_index("Cụm")["Điểm thi"].to_dict()
+    cum_list = df_hs["Cụm"].dropna().astype(str).str.strip().unique()
+    xep_clean_v = df_xep.dropna(subset=["Cụm", "Điểm thi"]).copy()
+    xep_clean_v["Cụm"] = xep_clean_v["Cụm"].astype(str).str.strip()
+    xep_map = xep_clean_v.set_index("Cụm")["Điểm thi"].to_dict()
     missing_cum = [c for c in cum_list if c not in xep_map]
     if missing_cum:
         errors.append(f"Các Cụm chưa được gán Điểm thi: {missing_cum}")
@@ -272,8 +274,10 @@ def process_sbd(df_hs_raw: pd.DataFrame, df_diem: pd.DataFrame, df_xep: pd.DataF
     df["STT"] = range(1, len(df) + 1)
 
     # ── Build Điểm thi map from Xếp-điểm-thi ──
-    xep_clean = df_xep.dropna(subset=["Cụm", "Điểm thi"])
+    xep_clean = df_xep.dropna(subset=["Cụm", "Điểm thi"]).copy()
+    xep_clean["Cụm"] = xep_clean["Cụm"].astype(str).str.strip()
     xep_map = xep_clean.set_index("Cụm")["Điểm thi"].to_dict()
+    df["Cụm"] = df["Cụm"].astype(str).str.strip()
     df["Điểm thi"] = df["Cụm"].map(xep_map)
 
     # ── Build room capacity map ──
