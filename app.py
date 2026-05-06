@@ -16,110 +16,140 @@ st.set_page_config(
 # ─── CSS ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-.stApp { background: #F0F7FF !important; }
-[data-testid="stAppViewContainer"] { background: #F0F7FF !important; }
-[data-testid="stHeader"] { background: transparent !important; }
+/* ── Force light mode toàn bộ, bỏ qua prefers-color-scheme ── */
+html, body, [data-testid="stAppViewContainer"], .stApp,
+[data-testid="stApp"], [class*="main"] {
+    background-color: #FFFFFF !important;
+    color: #1E293B !important;
+}
+[data-testid="stHeader"] { background: transparent !important; box-shadow: none !important; }
+[data-testid="stSidebar"] { background: #F8FAFC !important; }
 
+/* ── Ép tất cả text mặc định về màu tối ── */
+p, span, label, div, h1, h2, h3, h4, li,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] span {
+    color: #1E293B !important;
+}
+
+/* ── Title ── */
 .app-title {
     text-align: center;
     font-size: 1.75rem;
     font-weight: 800;
-    padding: 1.2rem 0 .3rem;
-    color: #1D4ED8;
+    padding: 1.2rem 0 .25rem;
+    color: #1D4ED8 !important;
     letter-spacing: .3px;
 }
 .app-subtitle {
     text-align: center;
-    color: #64748B;
-    font-size: .88rem;
+    color: #475569 !important;
+    font-size: .9rem;
     margin-bottom: 1.6rem;
 }
 
+/* ── Cards: nền sữa đậm, viền xanh nhạt ── */
 .card {
-    background: #FFFFFF;
+    background: #EEF2F7 !important;
     border-radius: 14px;
-    padding: 1.2rem 1.5rem 1.3rem;
+    padding: 1.15rem 1.5rem 1.25rem;
     margin-bottom: 1rem;
-    border: 1.5px solid #DBEAFE;
-    box-shadow: 0 1px 8px rgba(37,99,235,.07);
+    border: 1.5px solid #C7D9F0;
+    box-shadow: 0 2px 8px rgba(30,58,138,.06);
 }
 .card-label {
     font-size: .72rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #3B82F6;
-    margin-bottom: .55rem;
+    letter-spacing: 1.3px;
+    color: #2563EB !important;
+    margin-bottom: .5rem;
 }
 .card-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #1E3A5F;
-    margin-bottom: .85rem;
+    color: #0F172A !important;
+    margin-bottom: .8rem;
 }
 
+/* ── Radio pills ── */
 div[data-testid="stRadio"] > div { gap: 8px !important; flex-wrap: wrap; }
 div[data-testid="stRadio"] label {
-    background: #EFF6FF !important;
-    border: 1.5px solid #BFDBFE !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #93C5FD !important;
     border-radius: 50px !important;
-    padding: .4rem 1.1rem !important;
+    padding: .38rem 1.1rem !important;
     font-weight: 600 !important;
     font-size: .9rem !important;
     color: #1D4ED8 !important;
-    transition: all .18s;
+    transition: all .15s;
 }
 div[data-testid="stRadio"] label:has(input:checked) {
     background: #1D4ED8 !important;
     border-color: #1D4ED8 !important;
     color: #FFFFFF !important;
 }
+div[data-testid="stRadio"] label * { color: inherit !important; }
 
+/* ── Caption / small text ── */
+[data-testid="stCaptionContainer"] p,
+small { color: #475569 !important; }
+
+/* ── Download button ── */
 .stDownloadButton > button {
-    background: #EFF6FF !important;
+    background: #FFFFFF !important;
     border: 1.5px solid #93C5FD !important;
     color: #1D4ED8 !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
 }
-.stDownloadButton > button:hover { background: #DBEAFE !important; }
+.stDownloadButton > button:hover { background: #EFF6FF !important; }
 .stButton > button { border-radius: 8px !important; font-weight: 600 !important; }
 
+/* ── Info / banners ── */
 .banner-ok {
     background: #F0FDF4; border-left: 4px solid #22C55E;
     padding: .8rem 1.1rem; border-radius: 8px; margin: .7rem 0;
-    color: #15803D; font-weight: 600; font-size: .92rem;
+    color: #15803D !important; font-weight: 600; font-size: .92rem;
 }
 .banner-err {
     background: #FEF2F2; border-left: 4px solid #EF4444;
     padding: .8rem 1.1rem; border-radius: 8px; margin: .5rem 0;
-    color: #B91C1C; font-weight: 600; font-size: .92rem;
+    color: #B91C1C !important; font-weight: 600; font-size: .92rem;
 }
+/* Streamlit's st.info box */
+[data-testid="stAlert"] { background: #EFF6FF !important; border-color: #93C5FD !important; }
+[data-testid="stAlert"] p { color: #1E3A8A !important; }
 
+/* ── File uploader ── */
 [data-testid="stFileUploader"] {
     border: 2px dashed #93C5FD !important;
     border-radius: 10px !important;
     background: #F8FBFF !important;
-    padding: .3rem !important;
 }
+[data-testid="stFileUploaderDropzone"] {
+    background: #F8FBFF !important;
+    color: #334155 !important;
+}
+[data-testid="stFileUploaderDropzone"] * { color: #334155 !important; }
+
+/* ── Metric cards ── */
 [data-testid="stMetric"] {
-    background: #EFF6FF;
+    background: #DBEAFE !important;
     border-radius: 10px;
     padding: .6rem .8rem;
     border: 1px solid #BFDBFE;
 }
-
-@media (prefers-color-scheme: dark) {
-    .stApp, [data-testid="stAppViewContainer"] { background: #0F172A !important; }
-    .card { background: #1E293B !important; border-color: #334155 !important; }
-    .card-title { color: #E2E8F0 !important; }
-    .card-label { color: #60A5FA !important; }
-    .app-title { color: #93C5FD !important; }
-    .app-subtitle { color: #94A3B8 !important; }
-    div[data-testid="stRadio"] label { background: #1E3A5F !important; border-color: #3B82F6 !important; color: #93C5FD !important; }
-    div[data-testid="stRadio"] label:has(input:checked) { background: #1D4ED8 !important; color: #FFF !important; }
-    [data-testid="stMetric"] { background: #1E293B !important; border-color: #334155 !important; }
+[data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+    color: #1E3A8A !important;
 }
+
+/* ── Dataframe ── */
+[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
+
+/* ── Selectbox / inputs ── */
+[data-testid="stSelectbox"] label,
+[data-testid="stTextInput"] label { color: #1E293B !important; }
 </style>
 """, unsafe_allow_html=True)
 
