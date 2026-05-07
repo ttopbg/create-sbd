@@ -492,14 +492,14 @@ with col_lbl2:
 </div>
 ''', unsafe_allow_html=True)
 with col_body2:
-    st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
+    # st.markdown('<div class="sub-label">📥 Tải file mẫu</div>', unsafe_allow_html=True)
     st.download_button(
-        "⬇️ Tải file mẫu (SBD_mẫu.xlsx)",
+        "⬇️ Tải file mẫu",
         data=load_sample_bytes(),
         file_name="SBD_mẫu.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
-    st.markdown('<div class="sub-label" style="margin-top:.9rem;">📤 Upload file data</div>', unsafe_allow_html=True)
+    # st.markdown('<div class="sub-label" style="margin-top:.9rem;">📤 Upload file data</div>', unsafe_allow_html=True)
     uploaded = st.file_uploader(
         "Upload file .xlsx",
         type=["xlsx"],
