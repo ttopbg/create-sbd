@@ -438,7 +438,7 @@ for k in ["result_df", "result_bytes", "errors"]:
 # ═══════════════════════════════════════════════════════════════════════════════
 # UI
 # ═══════════════════════════════════════════════════════════════════════════════
-st.markdown('<div class="app-title">📋 CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-title">CÁC KỲ THI: TẠO SBD TỰ ĐỘNG</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="steps-title" style="text-align: center;">BEBRAS - AMC - VEO</div></br></br>', unsafe_allow_html=True)
 
@@ -449,6 +449,7 @@ st.markdown('<div class="steps-title" style="text-align: center;">BEBRAS - AMC -
 #   <div class="row-content" id="step1-content"></div>
 # </div>
 # """, unsafe_allow_html=True)
+st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 
 col_lbl1, col_body1 = st.columns([1, 4], gap="small")
 with col_lbl1:
