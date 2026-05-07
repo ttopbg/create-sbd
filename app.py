@@ -213,7 +213,7 @@ EXAM_RULES = {
     "AMC8": {
         "label": "AMC8",
         "desc": "Lớp 4–8",
-        "valid_grades": [4, 5, 6, 7, 8],
+        "valid_grades": [4, 5, 6, 7, 8, 9, 10],
     },
     "AMC1012": {
         "label": "AMC10/12",
@@ -225,7 +225,7 @@ EXAM_RULES = {
         "label": "VEO",
         "desc": "VEO JUNIOR: Lớp 6–9 | VEO: Lớp 10–12",
         "valid_grades": list(range(6, 13)),
-        "sub_levels": {"VEO JUNIOR": [6,7,8,9], "VEO": [10,11,12]},
+        "sub_levels": {"VEO JUNIOR": [5, 6,7,8,9], "VEO": [10,11,12]},
         "level_order": ["VEO JUNIOR", "VEO"],
     },
 }
