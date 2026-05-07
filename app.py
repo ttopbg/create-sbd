@@ -204,7 +204,7 @@ small { color: #475569 !important; }
 [data-testid="stAppViewContainer"]::before {
     content: "";
     position: fixed;
-    opacity: 0.8;
+    opacity: 0.25;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
