@@ -547,7 +547,7 @@ with col_body3:
                 except Exception as e:
                     st.session_state.errors = [f"Lỗi: {e}", f"```\n{traceback.format_exc()}\n```"]
     else:
-        st.markdown('<span style="color:#94A3B8;font-size:.9rem;">← Upload file ở Bước 2 trước</span>', unsafe_allow_html=True)
+        st.markdown('<span style="color:#94A3B8;font-size:.9rem;">🆘 Upload file Dữ liệu cần xử lý ở Bước 2 trước!</span>', unsafe_allow_html=True)
 
 st.markdown('<div class="row-divider"></div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)  # close steps-wrapper
@@ -555,7 +555,7 @@ st.markdown('</div>', unsafe_allow_html=True)  # close steps-wrapper
 # ── Lỗi + sửa trực tiếp ──────────────────────────────────────────────────────
 if st.session_state.errors:
     for err in st.session_state.errors:
-        st.markdown(f'<div class="banner-err">⚠️ {err}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="banner-err">⁉️ {err}</div>', unsafe_allow_html=True)
     if uploaded:
         st.markdown("**🛠️ Chỉnh sửa trực tiếp để khắc phục:**")
         try:
