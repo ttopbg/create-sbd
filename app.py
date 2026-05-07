@@ -204,8 +204,8 @@ small { color: #475569 !important; }
 [data-testid="stAppViewContainer"]::before {
     content: "";
     position: fixed;
-    top: 25%;
-    left: 40%;
+    top: 20%;
+    left: 35%;
     transform: translate(-70%, -70%);
     width: 100px;
     height: 100px;
