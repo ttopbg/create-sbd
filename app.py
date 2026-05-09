@@ -730,6 +730,6 @@ if st.session_state.result_df is not None:
 
 st.markdown(
     '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
-    'Tools can make mistakes. Please double-check results.</p>',
+    'Tools can make mistakes. Please double-check the results.</p>',
     unsafe_allow_html=True,
 )
