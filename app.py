@@ -348,6 +348,7 @@ with st.sidebar:
         
         **Lưu ý:**
         - Cột SBD sử dụng công thức Excel
+        - Sau đó dựa vào cột <b>ID gốc</b> để map SBD vào file <i>Data</i>
         - Có thể chỉnh sửa Điểm/Phòng/STT, SBD tự cập nhật
         """)
     
