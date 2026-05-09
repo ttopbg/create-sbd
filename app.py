@@ -308,10 +308,11 @@ with st.sidebar:
     
     with st.expander("⚙️ **Lưu ý**", expanded=False):
         st.markdown("""
-        **SBD khi gán là dồn phòng**
-        - Dồn đủ hs vào phòng theo dữ liệu đặt trước từ sheet **'Điểm-thi'**
+        **Gán SBD dồn phòng**
+        - Dữ liệu đầu vào: Căn cứ theo định mức sĩ số tại sheet **'Điểm-thi'**.
+        - Xử lý chuyển tiếp: Nếu phòng cuối của cấp độ 1 còn chỗ, hệ thống tự động gán tiếp thí sinh cấp độ 2 vào cùng phòng.
         - *VD: khi phòng cuối cấp độ 1 có 5hs thì gán tiếp hs của cấp độ 2*
-        - Để tránh trường hợp phòng quá ít
+        - Chưa có cơ chế tách phòng theo Cấp độ, để tránh trường hợp phòng quá ít khi không kiểm soát được số phòng và sĩ số trong phòng ở sheet **'Điểm-thi'**
         """)
     
     # with st.expander("✅ **Checklist trước khi upload**", expanded=False):
