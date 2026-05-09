@@ -258,29 +258,20 @@ SAMPLE_PATH = "SBD_mẫu.xlsx"
 with st.sidebar:
     st.markdown("### 📖 Hướng dẫn sử dụng")
     
-    with st.expander("🎯 **Mô tả các kỳ thi**", expanded=False):
-        st.markdown("""
-        **Kỳ thi Bebras:**
-        - Áp dụng cho học sinh từ lớp 1 đến 12
-        - Chia thành 6 cấp độ:
-          - Cấp độ 1: Lớp 1-2
-          - Cấp độ 2: Lớp 3-4
-          - Cấp độ 3: Lớp 5-6
-          - Cấp độ 4: Lớp 7-8
-          - Cấp độ 5: Lớp 9-10
-          - Cấp độ 6: Lớp 11-12
+    # with st.expander("🎯 **Mô tả lựa chọn các kỳ thi**", expanded=False):
+    #     st.markdown("""
+    #     **Kỳ thi Bebras:**
+    #     - Áp dụng cho học sinh từ lớp 1 đến 12 chia thành 6 cấp độ từ 1 đến 6
+
+    #     **Kỳ thi AMC8:**
+    #     - Dành cho học sinh từ lớp 4 đến lớp 8
         
-        **Kỳ thi AMC8:**
-        - Dành cho học sinh từ lớp 4 đến lớp 8
+    #     **Kỳ thi AMC10/12:**
+    #     - Gồm AMC10 và AMC12
         
-        **Kỳ thi AMC10/12:**
-        - AMC10: Khối 6, 7, 8, 9, 10
-        - AMC12: Khối 11, 12
-        
-        **Kỳ thi VEO:**
-        - VEO JUNIOR: THCS (Khối 6, 7, 8, 9)
-        - VEO: THPT (Khối 10, 11, 12)
-        """)
+    #     **Kỳ thi VEO:**
+    #     - Gồm VEO JUNIOR và VEO
+    #     """)
     
     with st.expander("📋 **Yêu cầu chuẩn hóa dữ liệu**", expanded=False):
         st.markdown("""
@@ -315,35 +306,35 @@ with st.sidebar:
         - ⚠️ **Điền đầy đủ tất cả các cụm**
         """)
     
-    with st.expander("⚙️ **Quy trình xử lý**", expanded=False):
-        st.markdown("""
-        **Bước 1: Sắp xếp dữ liệu**
-        - HS nước ngoài: Nhỏ → Lớn
-        - Cấp độ: Nhỏ → Lớn
-        - Khối: Nhỏ → Lớn
-        - Tên: A → Z
-        - Họ và tên đệm: A → Z
+    # with st.expander("⚙️ **Quy trình xử lý**", expanded=False):
+    #     st.markdown("""
+    #     **Bước 1: Sắp xếp dữ liệu**
+    #     - HS nước ngoài: Nhỏ → Lớn
+    #     - Cấp độ: Nhỏ → Lớn
+    #     - Khối: Nhỏ → Lớn
+    #     - Tên: A → Z
+    #     - Họ và tên đệm: A → Z
         
-        **Bước 2: Phân phòng thi**
-        - Lookup điểm thi từ Cụm
-        - Phân bổ vào phòng theo dung lượng
-        - Tạo STT trong phòng
+    #     **Bước 2: Phân phòng thi**
+    #     - Lookup điểm thi từ Cụm
+    #     - Phân bổ vào phòng theo dung lượng
+    #     - Tạo STT trong phòng
         
-        **Bước 3: Tạo SBD**
-        - Công thức: Điểm thi (2 số) + Phòng (2 số) + STT (2 số)
-        - Ví dụ: 010203 = Điểm 01, Phòng 02, STT 03
-        """)
+    #     **Bước 3: Tạo SBD**
+    #     - Công thức: Điểm thi (2 số) + Phòng (2 số) + STT (2 số)
+    #     - Ví dụ: 010203 = Điểm 01, Phòng 02, STT 03
+    #     """)
     
-    with st.expander("✅ **Checklist trước khi upload**", expanded=False):
-        st.markdown("""
-        - [ ] Đã chuẩn hóa Khối lớp theo kỳ thi
-        - [ ] Đã chuẩn hóa Xã/Phường, Tỉnh thành
-        - [ ] Đã điền đầy đủ Cấp độ
-        - [ ] Sheet 'Điểm-thi' đã liệt kê tất cả phòng
-        - [ ] Sheet 'Xếp-điểm-thi' đã điền đủ cụm
-        - [ ] Đã kiểm tra công thức cột Cụm
-        - [ ] Không có dòng trống trong dữ liệu
-        """)
+    # with st.expander("✅ **Checklist trước khi upload**", expanded=False):
+    #     st.markdown("""
+    #     - [ ] Đã chuẩn hóa Khối lớp theo kỳ thi
+    #     - [ ] Đã chuẩn hóa Xã/Phường, Tỉnh thành
+    #     - [ ] Đã điền đầy đủ Cấp độ
+    #     - [ ] Sheet 'Điểm-thi' đã liệt kê tất cả phòng
+    #     - [ ] Sheet 'Xếp-điểm-thi' đã điền đủ cụm
+    #     - [ ] Đã kiểm tra công thức cột Cụm
+    #     - [ ] Không có dòng trống trong dữ liệu
+    #     """)
     
     with st.expander("📤 **Kết quả đầu ra**", expanded=False):
         st.markdown("""
@@ -746,8 +737,8 @@ if st.session_state.result_df is not None:
         type="primary",
     )
 
-# st.markdown(
-#     '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
-#     'SBD Auto Generator · BEBRAS · AMC8 · AMC10/12 · VEO</p>',
-#     unsafe_allow_html=True,
-# )
+st.markdown(
+    '<p style="text-align:center;color:#94A3B8;font-size:.78rem;margin-top:1.5rem;">'
+    'Tools can make mistakes. Please double-check results.</p>',
+    unsafe_allow_html=True,
+)
