@@ -306,24 +306,13 @@ with st.sidebar:
         - ⚠️ **Điền đầy đủ tất cả các cụm**
         """)
     
-    # with st.expander("⚙️ **Quy trình xử lý**", expanded=False):
-    #     st.markdown("""
-    #     **Bước 1: Sắp xếp dữ liệu**
-    #     - HS nước ngoài: Nhỏ → Lớn
-    #     - Cấp độ: Nhỏ → Lớn
-    #     - Khối: Nhỏ → Lớn
-    #     - Tên: A → Z
-    #     - Họ và tên đệm: A → Z
-        
-    #     **Bước 2: Phân phòng thi**
-    #     - Lookup điểm thi từ Cụm
-    #     - Phân bổ vào phòng theo dung lượng
-    #     - Tạo STT trong phòng
-        
-    #     **Bước 3: Tạo SBD**
-    #     - Công thức: Điểm thi (2 số) + Phòng (2 số) + STT (2 số)
-    #     - Ví dụ: 010203 = Điểm 01, Phòng 02, STT 03
-    #     """)
+    with st.expander("⚙️ **Lưu ý**", expanded=False):
+        st.markdown("""
+        **SBD khi gán là dồn phòng**
+        - Dồn đủ hs vào phòng theo dữ liệu đặt trước từ sheet **'Điểm-thi'**
+        - *VD: khi phòng cuối cấp độ 1 có 5hs thì gán tiếp hs của cấp độ 2*
+        - Để tránh trường hợp phòng quá ít
+        """)
     
     # with st.expander("✅ **Checklist trước khi upload**", expanded=False):
     #     st.markdown("""
