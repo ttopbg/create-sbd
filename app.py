@@ -10,7 +10,7 @@ st.set_page_config(
     page_title="Tạo SBD Tự Động",
     page_icon="💮",
     layout="centered",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # ─── CSS ───────────────────────────────────────────────────────────────────────
@@ -253,6 +253,115 @@ EXAM_RULES = {
 }
 
 SAMPLE_PATH = "SBD_mẫu.xlsx"
+
+# ─── SIDEBAR HƯỚNG DẪN ─────────────────────────────────────────────────────────
+with st.sidebar:
+    st.markdown("### 📖 Hướng dẫn sử dụng")
+    
+    with st.expander("🎯 **Mô tả các kỳ thi**", expanded=False):
+        st.markdown("""
+        **Kỳ thi Bebras:**
+        - Áp dụng cho học sinh từ lớp 1 đến 12
+        - Chia thành 6 cấp độ:
+          - Cấp độ 1: Lớp 1-2
+          - Cấp độ 2: Lớp 3-4
+          - Cấp độ 3: Lớp 5-6
+          - Cấp độ 4: Lớp 7-8
+          - Cấp độ 5: Lớp 9-10
+          - Cấp độ 6: Lớp 11-12
+        
+        **Kỳ thi AMC8:**
+        - Dành cho học sinh từ lớp 4 đến lớp 8
+        
+        **Kỳ thi AMC10/12:**
+        - AMC10: Khối 6, 7, 8, 9, 10
+        - AMC12: Khối 11, 12
+        
+        **Kỳ thi VEO:**
+        - VEO JUNIOR: THCS (Khối 6, 7, 8, 9)
+        - VEO: THPT (Khối 10, 11, 12)
+        """)
+    
+    with st.expander("📋 **Yêu cầu chuẩn hóa dữ liệu**", expanded=False):
+        st.markdown("""
+        **Chuẩn hóa theo kỳ thi:**
+        - **Khối lớp**: Phải chính xác theo quy định của từng kỳ thi
+        - **Xã/Phường**: Viết đầy đủ, thống nhất
+        - **Tỉnh thành**: Viết đầy đủ, thống nhất
+        - **Cấp độ**: Điền đúng theo kỳ thi đã chọn
+        
+        **Lưu ý quan trọng:**
+        - Dữ liệu phải nhất quán trong toàn bộ file
+        - Không để trống các trường bắt buộc
+        - Kiểm tra kỹ trước khi upload
+        """)
+    
+    with st.expander("📁 **Cấu trúc file Excel mẫu**", expanded=False):
+        st.markdown("""
+        **Sheet 'Học-sinh':**
+        - STT, ID gốc, Họ và tên đệm, Tên
+        - Ngày sinh, Tháng sinh, Năm sinh
+        - Giới tính, Khối lớp, Lớp
+        - Xã/Phường, Tỉnh thành
+        - Cấp độ, HS nước ngoài
+        - Cụm (công thức tự động: Tỉnh-Xã)
+        
+        **Sheet 'Điểm-thi':**
+        - Điểm thi, Phòng, Số lượng hs/phòng
+        - ⚠️ **Liệt kê TẤT CẢ phòng thi và số lượng HS**
+        
+        **Sheet 'Xếp-điểm-thi':**
+        - Điền điểm thi cho từng Cụm
+        - ⚠️ **Điền đầy đủ tất cả các cụm**
+        """)
+    
+    with st.expander("⚙️ **Quy trình xử lý**", expanded=False):
+        st.markdown("""
+        **Bước 1: Sắp xếp dữ liệu**
+        - HS nước ngoài: Nhỏ → Lớn
+        - Cấp độ: Nhỏ → Lớn
+        - Khối: Nhỏ → Lớn
+        - Tên: A → Z
+        - Họ và tên đệm: A → Z
+        
+        **Bước 2: Phân phòng thi**
+        - Lookup điểm thi từ Cụm
+        - Phân bổ vào phòng theo dung lượng
+        - Tạo STT trong phòng
+        
+        **Bước 3: Tạo SBD**
+        - Công thức: Điểm thi (2 số) + Phòng (2 số) + STT (2 số)
+        - Ví dụ: 010203 = Điểm 01, Phòng 02, STT 03
+        """)
+    
+    with st.expander("✅ **Checklist trước khi upload**", expanded=False):
+        st.markdown("""
+        - [ ] Đã chuẩn hóa Khối lớp theo kỳ thi
+        - [ ] Đã chuẩn hóa Xã/Phường, Tỉnh thành
+        - [ ] Đã điền đầy đủ Cấp độ
+        - [ ] Sheet 'Điểm-thi' đã liệt kê tất cả phòng
+        - [ ] Sheet 'Xếp-điểm-thi' đã điền đủ cụm
+        - [ ] Đã kiểm tra công thức cột Cụm
+        - [ ] Không có dòng trống trong dữ liệu
+        """)
+    
+    with st.expander("📤 **Kết quả đầu ra**", expanded=False):
+        st.markdown("""
+        **Sheet 'SBD' bao gồm:**
+        - STT, Điểm thi, Phòng thi
+        - STT trong phòng, **SBD (công thức)**
+        - Thông tin học sinh đầy đủ
+        
+        **Sheet 'Điểm-thi' và 'Xếp-điểm-thi':**
+        - Giữ nguyên từ file mẫu
+        
+        **Lưu ý:**
+        - Cột SBD sử dụng công thức Excel
+        - Có thể chỉnh sửa Điểm/Phòng/STT, SBD tự cập nhật
+        """)
+    
+    st.markdown("---")
+    st.markdown("💡 **Mẹo:** Tải file mẫu để xem cấu trúc chi tiết!")
 
 
 # ─── HELPERS ───────────────────────────────────────────────────────────────────
