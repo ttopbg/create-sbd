@@ -420,7 +420,13 @@ def export_excel(df_sbd, df_diem_raw, df_xep_raw):
             c.font = hdr_font; c.fill = hdr_fill; c.alignment = center; c.border = thin
         for ri, row in enumerate(df.itertuples(index=False), 2):
             for ci, val in enumerate(row, 1):
-                c = ws.cell(ri, ci, val)
+                # Nếu là cột SBD (cột 5), ghi công thức thay vì giá trị
+                if ci == 5:
+                    # Công thức: =TEXT(B{row},"00")&TEXT(C{row},"00")&TEXT(D{row},"00")
+                    formula = f'=TEXT(B{ri},"00")&TEXT(C{ri},"00")&TEXT(D{ri},"00")'
+                    c = ws.cell(ri, ci, formula)
+                else:
+                    c = ws.cell(ri, ci, val)
                 c.border = thin
                 c.alignment = Alignment(vertical="center",
                                         horizontal="center" if ci <= 5 else "left")
